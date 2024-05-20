@@ -1,0 +1,107 @@
+const int  s0= 8;
+const int  s1= 9;
+const int  s2= 10;  
+const int  s3= 11;
+
+
+const int motorA1 = 2;  
+const int motorA2 = 3;  
+const int motorB1 = 4;  
+const int motorB2 = 5;  
+
+
+void setup()
+{
+  pinMode(s0, INPUT);
+  pinMode(s1, INPUT);
+  pinMode(s2, INPUT);
+  pinMode(s3, INPUT);
+ 
+ 
+  pinMode(motorA1, OUTPUT);
+  pinMode(motorA2, OUTPUT);
+  pinMode(motorB1, OUTPUT);
+  pinMode(motorB2, OUTPUT);
+}
+
+
+void loop()
+{
+  int s0Value = digitalRead(s0);
+  int s1Value = digitalRead(s1);
+  int s2Value = digitalRead(s2);
+  int s3Value = digitalRead(s3);
+ 
+if (s0Value == LOW && s1Value == HIGH && s2Value == LOW && s3Value == HIGH || s0Value == LOW && s1Value == HIGH && s2Value == LOW && s3Value == LOW)
+{
+  moveForward();
+}
+
+
+else if (s0Value == HIGH && s1Value == LOW && s2Value == LOW && s3Value == HIGH || s0Value == LOW && s1Value == LOW && s2Value == LOW && s3Value == HIGH || s0Value == HIGH && s1Value == LOW && s2Value == LOW && s3Value == LOW || s0Value == LOW && s1Value == LOW && s2Value == LOW && s3Value == LOW)
+{
+  turnLeft();
+}
+
+
+
+
+else if (s0Value == HIGH && s1Value == HIGH && s2Value == LOW && s3Value == LOW)
+{
+  turnRight();
+}
+
+
+else if (s0Value == LOW && s1Value == HIGH && s2Value == LOW && s3Value == HIGH)
+{
+  uTurn();
+}
+
+
+else
+{
+  stopBot();
+}
+}
+
+void moveForward()
+{
+  digitalWrite(motorA1, HIGH);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, HIGH);
+  digitalWrite(motorB2, LOW);
+}
+
+
+void turnLeft()
+{
+  digitalWrite(motorA1, HIGH);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, LOW);
+  digitalWrite(motorB2, LOW);
+}
+
+
+void turnRight()
+{
+  digitalWrite(motorA1, LOW);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, HIGH);
+  digitalWrite(motorB2, LOW);
+}
+
+
+void stopBot()
+{
+  digitalWrite(motorA1, LOW);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, LOW);
+  digitalWrite(motorB2, LOW);
+}
+void uTurn()
+{
+  digitalWrite(motorA1, HIGH);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, LOW);
+  digitalWrite(motorB2, HIGH);
+}
