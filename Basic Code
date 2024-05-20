@@ -1,0 +1,74 @@
+const int leftSensor = 1;  
+const int rightSensor = 3;
+
+const int motorA1 = 2;  
+const int motorA2 = 3;  
+const int motorB1 = 4;  
+const int motorB2 = 5;  
+
+void setup()
+{
+  pinMode(leftSensor, INPUT);
+  pinMode(rightSensor, INPUT);
+ 
+  pinMode(motorA1, OUTPUT);
+  pinMode(motorA2, OUTPUT);
+  pinMode(motorB1, OUTPUT);
+  pinMode(motorB2, OUTPUT);
+}
+
+void loop()
+{
+  int leftSensorValue = digitalRead(leftSensor);
+  int rightSensorValue = digitalRead(rightSensor);
+
+  if (leftSensorValue == HIGH && rightSensorValue == LOW)
+   {
+    turnRight();
+   }
+  else if (leftSensorValue == LOW && rightSensorValue == HIGH)
+    {
+     turnLeft();
+    }
+  else if (leftSensorValue == LOW && rightSensorValue == LOW)
+   {
+    moveForward();
+   }
+  else
+   {
+    stopBot();
+   }
+}
+
+void moveForward()
+{
+  digitalWrite(motorA1, HIGH);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, HIGH);
+  digitalWrite(motorB2, LOW);
+}
+
+void turnLeft()
+{
+  digitalWrite(motorA1, HIGH);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, LOW);
+  digitalWrite(motorB2, LOW);
+}
+
+void turnRight()
+{
+  digitalWrite(motorA1, LOW);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, HIGH);
+
+  digitalWrite(motorB2, LOW);
+}
+
+void stopBot()
+{
+  digitalWrite(motorA1, LOW);
+  digitalWrite(motorA2, LOW);
+  digitalWrite(motorB1, LOW);
+  digitalWrite(motorB2, LOW);
+}
